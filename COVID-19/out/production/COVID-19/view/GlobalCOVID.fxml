@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="root" prefHeight="475.0" prefWidth="669.0" styleClass="globalCOVID" stylesheets="@style/dashboard.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GlobalCOVIDController">
+    <children>
+        <Button layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnHome_OnAction" prefHeight="40.0" prefWidth="93.0" text="🏠 Home" textFill="BLUE">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor></Button>
+
+        <DatePicker fx:id="txtDate" layoutX="22.0" layoutY="86.0" promptText="Date" />
+        <TextField fx:id="txtConfirmed_cases" alignment="CENTER" layoutX="19.0" layoutY="156.0" prefHeight="28.0" prefWidth="189.0" promptText="Confirmed Cases" />
+        <TextField fx:id="txtRecovered_cases" alignment="CENTER" layoutX="21.0" layoutY="227.0" prefHeight="28.0" prefWidth="189.0" promptText="Recovered" />
+        <TextField fx:id="txtDeaths" alignment="CENTER" layoutX="19.0" layoutY="294.0" prefHeight="28.0" prefWidth="189.0" promptText="Deaths" />
+        <Button fx:id="btnUpdate" layoutX="22.0" layoutY="360.0" mnemonicParsing="false" onAction="#btnUpdate_OnAction" text="Update" textFill="BLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+        <Label layoutX="20.0" layoutY="134.0" text="Enter the number of confimed cases" />
+        <Label layoutX="20.0" layoutY="205.0" text="Enter the number of recoverd cases" />
+        <Label layoutX="20.0" layoutY="276.0" text="Enter the number of deaths" />
+        <Label fx:id="lblErrorDate" layoutX="24.0" layoutY="111.0" textFill="RED">
+            <font>
+                <Font size="9.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblErrorConfirmedCases" layoutX="21.0" layoutY="184.0" textFill="RED">
+            <font>
+                <Font size="9.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblErrorRecoveredCases" layoutX="23.0" layoutY="256.0" textFill="RED">
+            <font>
+                <Font size="9.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblErrorDeaths" layoutX="21.0" layoutY="322.0" textFill="RED">
+            <font>
+                <Font size="9.0" />
+            </font>
+        </Label>
+
+      <HBox alignment="TOP_CENTER" layoutX="233.0" layoutY="54.0" prefHeight="373.0" prefWidth="412.0">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="444.0" prefWidth="280.0">
+               <children>
+                    <Label text="Global COVID-19" textFill="DARKBLUE">
+                        <font>
+                            <Font name="System Bold" size="33.0" />
+                        </font>
+                    </Label>
+                  <Label>
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                        </Label>
+                    <Label text="Latest Update as at">
+                        <font>
+                            <Font size="15.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="lblUpdated_Date" text="2020-05-05">
+                        <font>
+                            <Font name="System Bold" size="15.0" />
+                        </font>
+                    </Label>
+                  <Label>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                    <Label fx:id="lblConfirmed_Cases" alignment="CENTER" prefHeight="39.0" prefWidth="183.0" textFill="#1508ff">
+                        <font>
+                            <Font name="System Bold" size="40.0" />
+                        </font>
+                    </Label>
+                    <Label text="Confirmed Cases">
+                        <font>
+                            <Font name="System Bold" size="15.0" />
+                        </font>
+                    </Label>
+                  <Label />
+                    <Label fx:id="lblRecovered_cases" alignment="CENTER" prefHeight="41.0" prefWidth="183.0" text="1,167,991" textFill="#07791f">
+                        <font>
+                            <Font name="System Bold" size="40.0" />
+                        </font>
+                    </Label>
+                    <Label text="Recoverd">
+                        <font>
+                            <Font name="System Bold" size="15.0" />
+                        </font>
+                    </Label>
+                  <Label />
+                    <Label fx:id="lbl_Deaths" alignment="CENTER" prefHeight="21.0" prefWidth="149.0" text="251,580" textFill="RED">
+                        <font>
+                            <Font name="System Bold" size="40.0" />
+                        </font>
+                    </Label>
+                    <Label text="Deaths">
+                        <font>
+                            <Font name="System Bold" size="15.0" />
+                        </font>
+                    </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+    </children>
+</AnchorPane>

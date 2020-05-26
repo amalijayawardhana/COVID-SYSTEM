@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="root" prefHeight="541.0" prefWidth="699.0" styleClass="manageHospital" stylesheets="@style/dashboard.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageHospitalController">
+    <children>
+        <Label layoutX="246.0" layoutY="16.0" text="Manage Hospitals" textFill="BLUE">
+            <font>
+                <Font name="System Bold" size="25.0" />
+            </font>
+        </Label>
+        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnHome_OnAction" prefHeight="40.0" prefWidth="93.0" text="🏠 Home" textFill="BLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+        <ListView fx:id="lstHospitals" layoutX="13.0" layoutY="114.0" onMouseClicked="#lstHospital_OnAction" prefHeight="424.0" prefWidth="224.0" />
+        <TextField fx:id="txtSearch" layoutX="13.0" layoutY="86.0" onKeyTyped="#txtSearch_OnAction" prefHeight="28.0" prefWidth="224.0" promptText="🔍 Search Hospital" />
+        <TitledPane animated="false" collapsible="false" layoutX="246.0" layoutY="86.0" prefHeight="452.0" prefWidth="453.0" text="Hospital Information" textFill="BLUE">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="416.0" prefWidth="451.0">
+                    <children>
+                        <TextField fx:id="txtHospitalId" editable="false" layoutX="14.0" layoutY="8.0" prefHeight="28.0" prefWidth="122.0" promptText="ID" />
+                        <TextField fx:id="txtHospitalName" layoutX="14.0" layoutY="52.0" prefHeight="28.0" prefWidth="385.0" promptText="Hospital Name" />
+                        <TextField fx:id="txtHospitalCity" layoutX="14.0" layoutY="97.0" prefHeight="28.0" prefWidth="212.0" promptText="City" />
+                        <ComboBox fx:id="cmbDistricts" layoutX="226.0" layoutY="97.0" prefHeight="28.0" prefWidth="212.0" promptText="District" />
+                        <TextField fx:id="txtDirectorName" layoutX="14.0" layoutY="188.0" prefHeight="28.0" prefWidth="425.0" promptText="Director" />
+                        <TextField fx:id="txtDirectorContactNumber" layoutX="14.0" layoutY="237.0" prefHeight="28.0" prefWidth="423.0" promptText="Director Contact No" />
+                        <TextField fx:id="txtHospitalContact1" layoutX="14.0" layoutY="281.0" prefHeight="28.0" prefWidth="212.0" promptText="Hospital Contact No1" />
+                        <TextField fx:id="txtHospitalContact2" layoutX="226.0" layoutY="282.0" prefHeight="28.0" prefWidth="212.0" promptText="Hospital Contact No2" />
+                        <TextField fx:id="txtHospitalFaxNumber" layoutX="15.0" layoutY="329.0" prefHeight="28.0" prefWidth="212.0" promptText="Hospital Fax No" />
+                        <TextField fx:id="txtHospitalEmail" layoutX="227.0" layoutY="329.0" prefHeight="28.0" prefWidth="212.0" promptText="Hospital Email" />
+                        <Button fx:id="btnSave" layoutX="108.0" layoutY="389.0" mnemonicParsing="false" onAction="#btnSave_OnAction" prefHeight="28.0" prefWidth="93.0" text="Save" textFill="BLUE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                        <Button fx:id="btnDelete" layoutX="257.0" layoutY="390.0" mnemonicParsing="false" onAction="#btnDelete_OnAction" prefHeight="25.0" prefWidth="82.0" text="Delete" textFill="BLUE">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font></Button>
+                        <TextField fx:id="txtCapacity" layoutX="14.0" layoutY="142.0" prefHeight="28.0" prefWidth="424.0" promptText="Capacity" />
+                  <Label fx:id="lblErrorHospitalName" layoutX="16.0" layoutY="80.0" textFill="RED">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblErrorHospitalID" layoutX="16.0" layoutY="35.0" textFill="RED">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblErrorCity" layoutX="16.0" layoutY="125.0" textFill="RED">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblErrorCapacity" layoutX="16.0" layoutY="170.0" textFill="RED">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblErrorDirectorName" layoutX="16.0" layoutY="216.0" textFill="RED">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblDirectorContact" layoutX="17.0" layoutY="265.0" textFill="RED">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblErrorHospitalContact1" layoutX="16.0" layoutY="310.0" textFill="RED">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblErrorHospitalFax" layoutX="17.0" layoutY="356.0" textFill="RED">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblErrorHospitalEmail" layoutX="228.0" layoutY="357.0" textFill="RED">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblErrorHospitalContact2" layoutX="228.0" layoutY="310.0" textFill="RED">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lblErrorDistrict" layoutX="227.0" layoutY="125.0" textFill="RED">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+                    </children>
+                </AnchorPane>
+            </content>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+        </TitledPane>
+        <Button fx:id="btnAddNew" layoutX="16.0" layoutY="502.0" mnemonicParsing="false" onAction="#btnNewHospital_OnAction" prefHeight="28.0" prefWidth="218.0" text="+ New Hospital" textFill="BLUE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>

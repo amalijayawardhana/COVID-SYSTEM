@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="root" prefHeight="235.0" prefWidth="403.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageLoginController">
+    <children>
+          <Label alignment="CENTER" layoutX="109.0" layoutY="14.0" prefHeight="38.0" prefWidth="210.0" text="LOGIN">
+              <font>
+                  <Font name="System Bold" size="24.0" />
+              </font>
+          </Label>
+          <TextField fx:id="txtPasswordShow" layoutX="109.0" layoutY="111.0" prefHeight="26.0" prefWidth="210.0" promptText="Password" />
+
+          <Button fx:id="btnLogin" alignment="CENTER" contentDisplay="CENTER" layoutX="109.0" layoutY="167.0" mnemonicParsing="false" onAction="#btnLogin_OnAction" prefHeight="32.0" prefWidth="71.0" text="Login" />
+
+          <Label fx:id="lblError" layoutX="112.0" layoutY="141.0" prefHeight="15.0" prefWidth="210.0" textFill="#ee1212">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </Label>
+          <TextField fx:id="txtUsername" layoutX="109.0" layoutY="70.0" prefHeight="31.0" prefWidth="210.0" promptText="Username" />
+
+                <PasswordField fx:id="txtPasswordHide" layoutX="109.0" layoutY="110.0" prefHeight="28.0" prefWidth="210.0" promptText="Password" />
+
+          <ImageView fx:id="imghidePassword" fitHeight="15.0" fitWidth="17.0" layoutX="295.0" layoutY="116.0" onMouseClicked="#imgHidePAssword_OnAction" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../assets/passwordHide.png" />
+              </image>
+          </ImageView>
+          <ImageView fx:id="imgShowPassword" fitHeight="22.0" fitWidth="18.0" layoutX="294.0" layoutY="118.0" onMouseClicked="#imgShowPassword_OnAction" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../assets/passwordShow.png" />
+              </image>
+          </ImageView>
+    </children>
+</AnchorPane>

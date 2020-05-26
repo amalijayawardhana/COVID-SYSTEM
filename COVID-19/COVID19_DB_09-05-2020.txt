@@ -1,0 +1,63 @@
+CREATE DATABASE IF NOT EXISTS COVID_19;
+USE COVID_19;
+
+CREATE TABLE IF NOT EXISTS User(
+    user_id VARCHAR(10) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL ,
+    user_name VARCHAR(20) NOT NULL ,
+    password VARCHAR(20) NOT NULL ,
+    user_role VARCHAR(50) NOT NULL ,
+    contact_number INT NOT NULL ,
+    email VARCHAR(50) NOT NULL ,
+    location VARCHAR(100)
+);
+CREATE TABLE IF NOT EXISTS global_COVID_Update(
+    update_id INT AUTO_INCREMENT PRIMARY KEY ,
+    updated_date DATE NOT NULL ,
+    confirmed_cases INT NOT NULL ,
+    recovered_cases INT NOT NULL ,
+    dead_cases INT NOT NULL ,
+    user_id VARCHAR(10) NOT NULL ,
+    CONSTRAINT fk_globalCOVIDUpdate FOREIGN KEY (user_id) REFERENCES User(user_id)
+);
+CREATE TABLE IF NOT EXISTS  hospital(
+  hospital_id VARCHAR(10) NOT NULL PRIMARY KEY ,
+  hospital_name VARCHAR(100) NOT NULL ,
+  city VARCHAR(50) NOT NULL ,
+  district VARCHAR(50)NOT NULL ,
+  capacity INT NOT NULL ,
+  director_name VARCHAR(50) NOT NULL ,
+  director_contact_number INT NOT NULL ,
+  hospital_contactNo1 INT NOT NULL ,
+  hospital_contactNo2 INT NOT NULL ,
+  hospital_fax_number INT NOT NULL ,
+  hospital_email VARCHAR(100) NOT NULL,
+  it_person VARCHAR(20) DEFAULT 'not reserved' NOT NULL
+);
+CREATE TABLE IF NOT EXISTS user_hospital(
+    user_id VARCHAR(10) NOT NULL ,
+    hospital_id VARCHAR(10) NOT NULL ,
+    CONSTRAINT pk_user_hospital PRIMARY KEY (user_id,hospital_id),
+    CONSTRAINT fk1_user_hospital FOREIGN KEY (user_id) REFERENCES User(user_id),
+    CONSTRAINT fk2_user_hospital FOREIGN KEY (hospital_id) REFERENCES Hospital(hospital_id)
+);
+CREATE TABLE IF NOT EXISTS quarantine_center(
+    quarantine_center_id VARCHAR(10) PRIMARY KEY ,
+    quarantine_center_name VARCHAR(100) NOT NULL ,
+    city VARCHAR(50) NOT NULL ,
+    district VARCHAR(50) NOT NULL ,
+    head_name VARCHAR(50) NOT NULL ,
+    head_contact_number INT NOT NULL ,
+    quarantine_center_contactNo1 INT NOT NULL ,
+    quarantine_center_contactNo2 INT NOT NULL ,
+    capacity VARCHAR(10) NOT NULL ,
+    quarantine_center_email VARCHAR(100) NOT NULL,
+    it_person VARCHAR(20) DEFAULT 'not reserved' NOT NULL
+);
+CREATE TABLE IF NOT EXISTS user_quarantineCenter(
+    user_id VARCHAR(10) NOT NULL ,
+    quarantine_center_id VARCHAR(10) NOT NULL ,
+    CONSTRAINT pk_User_QuarantineCenter PRIMARY KEY (user_id,quarantine_center_id),
+    CONSTRAINT fk1_User_QuarantineCenter FOREIGN KEY (user_id) REFERENCES user(user_id),
+    CONSTRAINT fk2_User_QuarantineCenter FOREIGN KEY (quarantine_center_id) REFERENCES quarantine_center(quarantine_center_id)
+);

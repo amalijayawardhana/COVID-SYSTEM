@@ -1,0 +1,39 @@
+
+
+.dashboard{
+    -fx-background-image: url("/assets/Picture1.png");
+    -fx-background-size: 100% 100%;
+}
+.globalCOVID{
+    -fx-background-image: url("/assets/covidbg1.jpg");
+    -fx-background-size: 100% 100%;
+}
+.manageHospital{
+    -fx-background-image: url("/assets/Picture1.png");
+    -fx-background-size: 100% 100%;
+}
+.manageQuantineCenter{
+    -fx-background-image: url("/assets/Picture1.png");
+    -fx-background-size: 100% 100%;
+}
+/*
+#btnNewHospital{
+    -fx-text-fill: #a81818;
+}
+#btnDelete{
+    -fx-text-fill: #a81818;
+}
+#btnSave{
+    -fx-text-fill: #a81818;
+}*/
+
+
+/*.text-field {
+    -fx-background-color: #a9a9a9 , white , white;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}*/
+
+/*.text-field:focused {
+    -fx-background-color: #a9a9a9 , white , white;
+    -fx-background-insets: 0 -1 -1 -1, 0 0 0 0, 0 -1 3 -1;
+}*/
