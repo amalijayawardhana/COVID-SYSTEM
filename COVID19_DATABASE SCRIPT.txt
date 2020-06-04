@@ -1,0 +1,142 @@
+CREATE DATABASE IF NOT EXISTS COVID19_2;
+USE COVID19_2;
+
+CREATE TABLE IF NOT EXISTS User(
+    user_name VARCHAR(50) PRIMARY KEY ,
+    name VARCHAR(80) NOT NULL ,
+    contact_number VARCHAR(15) NOT NULL ,
+    email VARCHAR(50) NOT NULL ,
+    password VARCHAR(20) NOT NULL ,
+    user_role ENUM('Admin','P.S.T.F Member','Hospital IT','Quarantine Center IT') ,
+    location VARCHAR(100)
+);
+CREATE TABLE IF NOT EXISTS global_covid_data(
+    updated_date DATETIME PRIMARY KEY ,
+    confirmed_cases INT NOT NULL ,
+    recovered_cases INT NOT NULL ,
+    dead_cases INT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS  hospital(
+  hospital_id VARCHAR(10) PRIMARY KEY ,
+  hospital_name VARCHAR(100) NOT NULL ,
+  city VARCHAR(50) NOT NULL ,
+  district VARCHAR(50)NOT NULL ,
+  capacity INT NOT NULL ,
+  director_name VARCHAR(50) NOT NULL ,
+  director_contact_number VARCHAR(50) NOT NULL ,
+  hospital_contactNo1 VARCHAR(15) NOT NULL ,
+  hospital_contactNo2 VARCHAR(15) NOT NULL ,
+  hospital_fax_number VARCHAR(15) NOT NULL ,
+  hospital_email VARCHAR(100) NOT NULL,
+  it_person VARCHAR(20) DEFAULT 'not reserved' NOT NULL
+);
+CREATE TABLE IF NOT EXISTS user_hospital(
+    user_name VARCHAR(10) NOT NULL ,
+    hospital_id VARCHAR(10) NOT NULL ,
+    CONSTRAINT pk_user_hospital PRIMARY KEY (user_name,hospital_id),
+    CONSTRAINT fk1_user_hospital FOREIGN KEY (user_name) REFERENCES User(user_name),
+    CONSTRAINT fk2_user_hospital FOREIGN KEY (hospital_id) REFERENCES Hospital(hospital_id)
+);
+CREATE TABLE IF NOT EXISTS center(
+    center_id VARCHAR(10) PRIMARY KEY ,
+    center_name VARCHAR(100) NOT NULL ,
+    city VARCHAR(50) NOT NULL ,
+    district VARCHAR(50) NOT NULL ,
+    head_name VARCHAR(50) NOT NULL ,
+    head_contact_number VARCHAR(50) NOT NULL ,
+    center_contactNo1 VARCHAR(15) NOT NULL ,
+    center_contactNo2 VARCHAR(15) NOT NULL ,
+    capacity VARCHAR(10) NOT NULL ,
+    center_email VARCHAR(100) NOT NULL,
+    it_person VARCHAR(20) DEFAULT 'not reserved' NOT NULL
+);
+CREATE TABLE IF NOT EXISTS user_center(
+    user_name VARCHAR(10) NOT NULL ,
+    center_id VARCHAR(10) NOT NULL ,
+    CONSTRAINT pk_user_center PRIMARY KEY (user_name,center_id),
+    CONSTRAINT fk1_user_center FOREIGN KEY (user_name) REFERENCES user(user_name),
+    CONSTRAINT fk2_user_center FOREIGN KEY (center_id) REFERENCES center(center_id)
+);
+
+
+
+CREATE TABLE IF NOT EXISTS people(
+    id INT PRIMARY KEY,
+    first_name VARCHAR(45) NOT NULL ,
+    last_name VARCHAR(45) NOT NULL ,
+    address VARCHAR(100) NOT NULL ,
+    city VARCHAR(45) NOT NULL ,
+    district VARCHAR(45) NOT NULL ,
+    province VARCHAR(45) NOT NULL ,
+    nic VARCHAR(15) NOT NULL ,
+    contact_number VARCHAR(45) NOT NULL ,
+    blood_group VARCHAR(45) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS covid_positive(
+    covid_positive_id INT AUTO_INCREMENT PRIMARY KEY ,
+    person_id INT NOT NULL ,
+    date DATETIME NOT NULL ,
+    found VARCHAR(500) NOT NULL ,
+    CONSTRAINT fk_covid_positive FOREIGN KEY (person_id) REFERENCES people(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS  suspected(
+    suspected_id INT AUTO_INCREMENT PRIMARY KEY ,
+    person_id INT NOT NULL ,
+    reason VARCHAR(500) NOT NULL ,
+    date DATETIME NOT NULL ,
+    CONSTRAINT fk_suspected FOREIGN KEY (person_id) REFERENCES people(id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS auto_remove(
+    auto_remove_id INT AUTO_INCREMENT PRIMARY KEY ,
+    person_id INT NOT NULL ,
+    suspected_id INT NOT NULL,
+    date DATETIME NOT NULL ,
+    CONSTRAINT fk1_auto_remove FOREIGN KEY (person_id) REFERENCES people(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk2_auto_remove FOREIGN KEY (suspected_id) REFERENCES suspected(suspected_id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS quarantined(
+    person_id INT NOT NULL ,
+    reason VARCHAR(500) NOT NULL ,
+    entered_date DATETIME NOT NULL ,
+    center_id VARCHAR(10) NOT NULL ,
+    CONSTRAINT quarantined_id PRIMARY KEY (person_id,center_id),
+    CONSTRAINT fk1_quarantined FOREIGN KEY (person_id) REFERENCES people(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk2_quarantined FOREIGN KEY (center_id) REFERENCES center(center_id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS patient(
+    person_id INT NOT NULL ,
+    hospital_id VARCHAR(10) NOT NULL ,
+    date DATETIME NOT NULL ,
+    reason VARCHAR(500) NOT NULL ,
+    CONSTRAINT patient_id PRIMARY KEY (person_id,hospital_id),
+    CONSTRAINT fk1_patient FOREIGN KEY (person_id) REFERENCES people(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk2_patient FOREIGN KEY (hospital_id) REFERENCES hospital(hospital_id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS exit_data(
+    exit_data_id INT AUTO_INCREMENT PRIMARY KEY ,
+    person_id INT NOT NULL ,
+    hospital_id VARCHAR(50) NOT NULL,
+    center_id VARCHAR(10) NOT NULL ,
+    exit_reason ENUM('DISCHARGED','TRANSFERRED','DEAD'),
+    `from` VARCHAR(50),
+    `to` VARCHAR(50),
+    location ENUM('HOSPITAL','QUARANTINE CENTER'),
+    date DATETIME NOT NULL ,
+    CONSTRAINT fk1_exit_data FOREIGN KEY (person_id) REFERENCES people(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk2_exit_data FOREIGN KEY (hospital_id) REFERENCES hospital(hospital_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk3_exit_data FOREIGN KEY (center_id) REFERENCES center(center_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk4_exit_data FOREIGN KEY (person_id,hospital_id) REFERENCES patient(person_id,hospital_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk5_exit_data FOREIGN KEY (person_id,center_id) REFERENCES quarantined(person_id,center_id) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS reference(
+    reference_id INT AUTO_INCREMENT PRIMARY KEY,
+    person_id INT NOT NULL,
+    suspected_id INT,
+    hospital_id VARCHAR(50) NOT NULL,
+    center_id VARCHAR(10) NOT NULL ,
+    connection VARCHAR(500) NOT NULL ,
+    CONSTRAINT fk1_reference FOREIGN KEY (person_id) REFERENCES people(id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk2_reference FOREIGN KEY (suspected_id) REFERENCES suspected(suspected_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk3_reference FOREIGN KEY (person_id,hospital_id) REFERENCES patient(person_id,hospital_id) ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT fk4_reference FOREIGN KEY (person_id,center_id) REFERENCES quarantined(person_id,center_id) ON UPDATE CASCADE ON DELETE CASCADE
+);
